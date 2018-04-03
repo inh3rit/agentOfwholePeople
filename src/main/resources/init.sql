@@ -104,10 +104,10 @@ INSERT INTO `user_role`(`uid`, `rid`) VALUES (1, 1), (1, 2);
 INSERT INTO `navigation`(name) VALUES ('后台管理');
 -- html url
 INSERT INTO `interface`(`name`, `type`, `url`, `nid`)
-VALUES ('用户管理', 1,'/system/userList.html', 1),
-  ('角色管理', 1, '/system/roleList.html', 1),
-  ('接口管理', 1,'/system/interfaceList.html', 1),
-  ('导航栏管理', 1,'/system/navigationList.html', 1);
+VALUES ('用户管理', 1,'/pages/system/userList.html', 1),
+  ('角色管理', 1, '/pages/system/roleList.html', 1),
+  ('接口管理', 1,'/pages/system/interfaceList.html', 1),
+  ('导航栏管理', 1,'/pages/system/navigationList.html', 1);
 -- html url
 INSERT INTO `role_interface`(`rid`, `iid`)
 VALUES (2, 1), (2, 2), (2, 3),(2, 4); -- 系统管理员

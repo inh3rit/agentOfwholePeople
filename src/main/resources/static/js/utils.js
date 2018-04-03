@@ -13,7 +13,7 @@ layui.define(['jquery'], function(exports) {
         if (!result) return;
         if (result.code == -5) {
             if (_sessionInvalided === false) {
-                window.location.href = '/system/login.html?redirect=' + _urlencode(window.location.href);
+                window.location.href = '/pages/system/login.html?redirect=' + _urlencode(window.location.href);
                 _sessionInvalided = true;
             }
             return false;
