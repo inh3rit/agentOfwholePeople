@@ -7,6 +7,8 @@ import com.exemple.demo.mapper.MiniProgramMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MiniProgramService implements IMiniProgramService {
 
@@ -31,5 +33,15 @@ public class MiniProgramService implements IMiniProgramService {
     @Override
     public int addCreditCard(CreditCard creditCard) {
         return miniProgramMapper.insertCreditCard(creditCard);
+    }
+
+    @Override
+    public List<Customer> getCustomers(String agentIdNum) {
+        return miniProgramMapper.getCustomers(agentIdNum);
+    }
+
+    @Override
+    public List<CreditCard> getCreditCards(String agentIdNum) {
+        return miniProgramMapper.getCreditCards(agentIdNum);
     }
 }

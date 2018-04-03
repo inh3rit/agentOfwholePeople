@@ -8,10 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 小程序接口
@@ -80,6 +79,20 @@ public class MiniProgramController {
                 return "未知错误";
         }
         return "SUCCESS";
+    }
+
+    @RequestMapping(value = "getCustomers", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Customer> getCustomers(String agentIdNum) {
+        List<Customer> customers = miniProgramService.getCustomers(agentIdNum);
+        return customers;
+    }
+
+    @RequestMapping(value = "getCreditCards", method = RequestMethod.GET)
+    public @ResponseBody
+    List<CreditCard> getCreditCards(String agentIdNum) {
+        List<CreditCard> creditCards = miniProgramService.getCreditCards(agentIdNum);
+        return creditCards;
     }
 
 }
