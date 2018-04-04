@@ -105,21 +105,21 @@
                     pageNo = result.content.pageNo + 1;
                     pageSize = result.content.pageSize;
                     totalCount = result.content.customerCount;
-                    var agentList = result.content.customerList;
-                    $.each(agentList, function (idx, customer) {
+                    var customerList = result.content.customerList;
+                    $.each(customerList, function (idx, customer) {
                         var tr = $('<tr class="user_info_row" data-nid="' + customer.id + '"></tr>');
                         tr.append('<td>' + (idx + 1) + '</td>');
                         tr.append('<td>' + customer.name + '</td>');
                         tr.append('<td>' + customer.telephone + '</td>');
                         tr.append('<td>' + (customer.sex == 0 ? '女' : '男') + '</td>');
-                        tr.append('<td><div class="layui-btn-group" data-uid="' + agent.id + '">'
-                            +   '<button class="layui-btn layui-btn-primary layui-btn-small btn_set_agent"' +
+                        tr.append('<td><div class="layui-btn-group" data-uid="' + customer.id + '">'
+                            +   '<button class="layui-btn layui-btn-primary layui-btn-small btn_set_customer"' +
                             ' title="编辑">'
                             +       '<i class="layui-icon">&#xe642;</i>'
                             +   '</button>'
                             + '</div></td>');
                         _customerListContainer.append(tr);
-                        _customerList[agent.id] = agent;
+                        _customerList[customer.id] = customer;
                     });
                 } else {
                     _layer.msg(result.msg ? result.msg : '获取顾客列表失败');
@@ -127,6 +127,83 @@
                 if (!first) {
                     setTimeout(function () {
                         _pager.render({elem: 'pagination', count: totalCount, limit: pageSize, curr: pageNo, jump: getCustomerList});
+                    }, 0);
+                }
+            });
+        }
+
+
+        // find creditCard
+        var _bodyEle = $('body');
+        _bodyEle.on('click', '.btn_find_creditcard', function () {
+            var uid = $(this).parent().attr('data-uid');
+            if (!uid) {
+                layer.msg('找不到经纪人的id，无法进行查找，请刷新页面再试');
+                return;
+            }
+            showFindCreditCardDialog(uid);
+        });
+        // find creditCard
+        var _btnFindCreditCard = $('#btn_find_creditcard');
+        var _findCreditCardHtmlContainer = $('#find_creditcard_html_container');
+        var _dialogIdx = false;
+        function showFindCreditCardDialog(uid) {
+            _dialogIdx = _layer.open({
+                type: 1,
+                area: ['800px', '520px'],
+                title: '银行卡信息',
+                content: _findCreditCardHtmlContainer.html(),
+                cancel: closeFindCreditCardDialog
+            });
+
+            getCreditCardList({curr: 1, agentIdNum: uid});
+        }
+        // close find CreditCard
+        function closeFindCreditCardDialog() {
+            if (_dialogIdx !== false) {
+                _layer.close(_dialogIdx);
+            }
+            _btnFindCreditCard.removeClass('layui-btn-disabled');
+            _dialogIdx = false;
+        }
+        var _creditCardListContainer = $('#findCreditCardContainer');
+        var _creditCardList = {};
+        function getCreditCardList(obj, first) {
+            if (first) return;
+            var pageNo = obj.curr;
+            _creditCardListContainer.html('');
+            _loading.showLoading();
+            $.get('/api/creditCard/list', {pageNo: pageNo - 1, agentIdNum: obj.agentIdNum}, function (result) {
+                _loading.hideLoading();
+                $('.layui-table').show();
+                var pageSize = 20, totalCount = 0;
+                if (result.code == 0) {
+                    pageNo = result.content.pageNo + 1;
+                    pageSize = result.content.pageSize;
+                    totalCount = result.content.creditCardCount;
+                    var creditCardList = result.content.creditCardList;
+                    $.each(creditCardList, function (idx, creditCard) {
+                        var tr = $('<tr class="user_info_row" data-nid="' + creditCard.id + '"></tr>');
+                        tr.append('<td>' + (idx + 1) + '</td>');
+                        tr.append('<td>' + creditCard.card_num + '</td>');
+                        tr.append('<td>' + creditCard.bank_name + '</td>');
+                        tr.append('<td>' + creditCard.sub_bank_name + '</td>');
+                        tr.append('<td>' + (creditCard.is_default == 0 ? '否' : '是') + '</td>');
+                        tr.append('<td><div class="layui-btn-group" data-uid="' + creditCard.id + '">'
+                            +   '<button class="layui-btn layui-btn-primary layui-btn-small btn_set_customer"' +
+                            ' title="编辑">'
+                            +       '<i class="layui-icon">&#xe642;</i>'
+                            +   '</button>'
+                            + '</div></td>');
+                        _creditCardListContainer.append(tr);
+                        _creditCardList[creditCard.id] = creditCard;
+                    });
+                } else {
+                    _layer.msg(result.msg ? result.msg : '获取银行卡列表失败');
+                }
+                if (!first) {
+                    setTimeout(function () {
+                        _pager.render({elem: 'pagination', count: totalCount, limit: pageSize, curr: pageNo, jump: getCreditCardList});
                     }, 0);
                 }
             });

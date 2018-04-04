@@ -110,7 +110,7 @@ create table agent
   unique (id_num)
 )
   comment '经纪人表'
-  engine = InnoDB;
+  engine = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- auto-generated definition
 create table credit_card
@@ -129,7 +129,7 @@ create table credit_card
   unique (card_num, agent_id_num)
 )
   comment '银行卡信息表'
-  engine = InnoDB;
+  engine = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- auto-generated definition
 create table customer
@@ -145,7 +145,7 @@ create table customer
   unique (telephone, agent_id_num)
 )
   comment '客户表'
-  engine = InnoDB;
+  engine = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_general_ci;
 
 
 
@@ -159,7 +159,7 @@ VALUES ('基础角色', '最基础的角色，所有用户都应该拥有该角�
 -- user_role
 INSERT INTO `user_role`(`uid`, `rid`) VALUES (1, 1), (1, 2);
 -- navigation
-INSERT INTO `navigation`(name) VALUES ('后台管理');
+INSERT INTO `navigation`(name) VALUES ('后台管理'),('业务管理');
 -- html url
 INSERT INTO `interface`(`name`, `type`, `url`, `nid`)
 VALUES ('用户管理', 1,'/pages/system/userList.html', 1),
@@ -194,7 +194,8 @@ INSERT INTO `interface`(`name`, `type`, `url`, `order_num`)
       ('修改导航栏', 0, '/api/navigation/update', 10), -- 25
       ('删除导航栏', 0, '/api/navigation/del', 10), -- 26
       ('获取所有启用的导航栏', 0, '/api/navigation/enabled', 10), -- 27
-      ('根据用户获取用于显示的导航栏', 0, '/api/navigation/navShow', 10); -- 28
+      ('根据用户获取用于显示的导航栏', 0, '/api/navigation/navShow', 10),
+      ('经纪人管理', 1,	'/pages/business/agentList.html', 0); -- 28
 -- api
 INSERT INTO `role_interface`(`rid`, `iid`) VALUES (1, 5), (1, 6), (1, 28), -- 基础角色
   (2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18), -- 系统管理员
