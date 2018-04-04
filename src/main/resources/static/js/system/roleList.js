@@ -69,7 +69,7 @@
             _dialogIdx = _layer.open({
                 type: 1,
                 area: ['400px', '320px'],
-                title: '添加接口',
+                title: '添加角色',
                 content: _addRoleHtmlContainer.html(),
                 cancel: closeAddRoleDialog
             });

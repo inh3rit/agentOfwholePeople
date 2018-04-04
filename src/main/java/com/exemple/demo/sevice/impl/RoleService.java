@@ -1,5 +1,8 @@
-package com.exemple.demo.sevice;
+package com.exemple.demo.sevice.impl;
 
+import com.exemple.demo.sevice.IInterfaceService;
+import com.exemple.demo.sevice.IRoleService;
+import com.exemple.demo.sevice.IUserService;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;

@@ -5,6 +5,9 @@ DROP TABLE IF EXISTS `interface`;
 DROP TABLE IF EXISTS `navigation`;
 DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `agent`;
+DROP TABLE IF EXISTS `credit_card`;
+DROP TABLE IF EXISTS `customer`;
 
 -- create table
 -- 用户账号表
@@ -91,6 +94,61 @@ CREATE TABLE IF NOT EXISTS `role_interface` (
   CONSTRAINT `fk_role_interface_iid` FOREIGN KEY (`iid`) REFERENCES `interface` (`id`) ON DELETE CASCADE
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_general_ci;
 
+-- auto-generated definition
+create table agent
+(
+  id        int auto_increment
+    primary key,
+  name      varchar(20)  null,
+  passwd    varchar(100) null,
+  telephone varchar(20)  null,
+  id_num    varchar(20)  not null,
+  sex       int          null,
+  constraint agent_id_uindex
+  unique (id),
+  constraint agent_id_num_uindex
+  unique (id_num)
+)
+  comment '经纪人表'
+  engine = InnoDB;
+
+-- auto-generated definition
+create table credit_card
+(
+  id            int auto_increment
+    primary key,
+  card_num      varchar(20)  not null,
+  bank_name     varchar(200) null,
+  sub_bank_name varchar(200) null,
+  city          varchar(200) null,
+  is_default    int          null,
+  agent_id_num  varchar(20)  not null,
+  constraint credit_card_id_uindex
+  unique (id),
+  constraint credit_card_card_num_agent_id_num_pk
+  unique (card_num, agent_id_num)
+)
+  comment '银行卡信息表'
+  engine = InnoDB;
+
+-- auto-generated definition
+create table customer
+(
+  id           int auto_increment
+    primary key,
+  name         varchar(20) not null,
+  sex          int         null,
+  description  text        null,
+  agent_id_num varchar(20) not null,
+  telephone    varchar(20) not null,
+  constraint customer_telephone_agent_id_num_pk
+  unique (telephone, agent_id_num)
+)
+  comment '客户表'
+  engine = InnoDB;
+
+
+
 -- start init data
 -- admin
 INSERT INTO `user`(username, password) VALUES ('admin', '6443a391de091eb7dc939df60b89ab637524f0e1'); -- password: 123456
@@ -142,3 +200,21 @@ INSERT INTO `role_interface`(`rid`, `iid`) VALUES (1, 5), (1, 6), (1, 28), -- �
   (2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18), -- 系统管理员
   (2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27); -- 系统管理员
 -- end init data
+
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (1, 'xuyetong', 'pyf3237829', '13855199239', '0', 1);
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (2, '111', '1111', '11111111111', '111111111111111', 0);
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (4, '222', '2222', '22222222222', '222222222222222', 1);
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (6, 'xuyetong', 'pyf3237829', '13855199239', '342622199009010638', 0);
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (12, '222', '222', '22222222222', '222222222222222222', 1);
+INSERT INTO demo.agent (id, name, passwd, telephone, id_num, sex) VALUES (16, '11111', '1211', '11111111111', '111211111111111', 0);
+
+INSERT INTO demo.credit_card (id, card_num, bank_name, sub_bank_name, city, is_default, agent_id_num) VALUES (1, '1', '1', '1', '1', 1, '111111111111111');
+INSERT INTO demo.credit_card (id, card_num, bank_name, sub_bank_name, city, is_default, agent_id_num) VALUES (3, '2', '浙商银行', '合肥支行', '合肥', 1, '111111111111111');
+INSERT INTO demo.credit_card (id, card_num, bank_name, sub_bank_name, city, is_default, agent_id_num) VALUES (4, '3', '工商银行', '合肥支行', '合肥', 1, '111111111111111');
+INSERT INTO demo.credit_card (id, card_num, bank_name, sub_bank_name, city, is_default, agent_id_num) VALUES (5, '4', '4', '4', '4', 1, '111111111111111');
+INSERT INTO demo.credit_card (id, card_num, bank_name, sub_bank_name, city, is_default, agent_id_num) VALUES (6, '5', '5', '5', '5', 1, '111111111111111');
+
+INSERT INTO demo.customer (id, name, sex, description, agent_id_num, telephone) VALUES (1, 'lina', 0, 'test', '111111111111111', '12121212121');
+INSERT INTO demo.customer (id, name, sex, description, agent_id_num, telephone) VALUES (3, 'tom', 1, 'test1', '111111111111111', '12121212122');
+INSERT INTO demo.customer (id, name, sex, description, agent_id_num, telephone) VALUES (4, 'jack', 1, 'test2', '111111111111111', '12121212123');
+INSERT INTO demo.customer (id, name, sex, description, agent_id_num, telephone) VALUES (5, 'crystina', 0, 'test4', '111111111111111', '23232323232');

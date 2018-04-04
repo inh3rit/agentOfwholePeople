@@ -75,7 +75,7 @@ layui.define(['jquery', 'layer', 'element', 'commonUtils', 'form', 'commonLoadin
             _layer.confirm('确定要退出登录？', function (index) {
                 _layer.close(index);
                 _utils.post('/api/login/logout', {}, function () {
-                    window.location.href = '/login.html';
+                    window.location.href = '/pages/system/login.html';
                 });
             });
         });

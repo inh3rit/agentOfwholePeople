@@ -88,7 +88,7 @@
             _dialogIdx = _layer.open({
                 type: 1,
                 area: ['400px', '320px'],
-                title: '添加接口',
+                title: '添加用户',
                 content: _addUserHtmlContainer.html(),
                 cancel: closeAddUserDialog
             });

@@ -1,5 +1,6 @@
-package com.exemple.demo.sevice;
+package com.exemple.demo.sevice.impl;
 
+import com.exemple.demo.sevice.ILoginService;
 import com.google.common.collect.Lists;
 import com.exemple.demo.Const.SqlParam;
 import com.exemple.demo.Exception.MainException;
