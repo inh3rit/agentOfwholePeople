@@ -65,6 +65,7 @@
                 layer.msg('找不到经纪人的id，无法进行查找，请刷新页面再试');
                 return;
             }
+            getCustomerList({curr: 1, agentIdNum: uid});
             showFindCustomerDialog(uid);
         });
         // find customer
@@ -79,8 +80,6 @@
                 content: _findCustomerHtmlContainer.html(),
                 cancel: closeFindCustomerDialog
             });
-
-            getCustomerList({curr: 1, agentIdNum: uid});
         }
         // close find customer
         function closeFindCustomerDialog() {
@@ -138,7 +137,7 @@
         _bodyEle.on('click', '.btn_find_creditcard', function () {
             var uid = $(this).parent().attr('data-uid');
             if (!uid) {
-                layer.msg('找不到经纪人的id，无法进行查找，请刷新页面再试');
+                layer.msg('找不到银行卡的id，无法进行查找，请刷新页面再试');
                 return;
             }
             showFindCreditCardDialog(uid);
