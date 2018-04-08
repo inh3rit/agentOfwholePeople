@@ -23,7 +23,6 @@ public interface CreditCardMapper {
     @Select("select count(id) from credit_card where agent_id_num=#{agent_id_num}")
     Integer creditCardCount(@Param("agent_id_num") String agent_id_num);
 
-    @Select("select * from credit_card where agent_id_num=#{agent_id_num} limit #{offset}, #{pageSize}")
-    List<CreditCard> creditCardList(@Param("agent_id_num") String agent_id_num, @Param("offset") Integer offset,
-                                    @Param("pageSize") Integer pageSize);
+    @Select("select * from credit_card where agent_id_num=#{agent_id_num}")
+    List<CreditCard> creditCardList(@Param("agent_id_num") String agent_id_num);
 }

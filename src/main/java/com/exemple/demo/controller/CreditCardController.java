@@ -25,17 +25,15 @@ public class CreditCardController {
     /**
      * 分页获取银行卡列表
      *
-     * @param pageNo Integer, 分页数字，从0开始
+     * @param agentIdNum Sting, 经纪人身份证号码
      * @return Result
      */
     @GetMapping("/list")
-    public Result userList(@RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo
-            , @RequestParam("agentIdNum") String agentIdNum) {
+    public Result userList(@RequestParam("agentIdNum") String agentIdNum) {
         Map<String, Object> resultMap = Maps.newHashMap();
         resultMap.put("creditCardCount", creditCardService.creditCardCount(agentIdNum));
-        resultMap.put("pageNo", pageNo);
         resultMap.put("pageSize", SqlParam.PageSize);
-        resultMap.put("creditCardList", creditCardService.creditCardList(agentIdNum, pageNo));
+        resultMap.put("creditCardList", creditCardService.creditCardList(agentIdNum));
         return new Result<>(ResultEnum.SUCCESS, resultMap);
     }
 }

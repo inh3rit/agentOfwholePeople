@@ -19,7 +19,6 @@ public interface CustomerMapper {
     @Select("select count(id) from customer where agent_id_num=#{agentIdNum}")
     Integer customerCount(@Param("agentIdNum") String agentIdNum);
 
-    @Select("select * from customer limit #{offset}, #{pageSize}")
-    List<Customer> customerList(@Param("agentIdNum") String agentIdNum, @Param("offset") Integer offset, @Param
-            ("pageSize") Integer pageSize);
+    @Select("select * from customer where agent_id_num=${agentIdNum}")
+    List<Customer> customerList(@Param("agentIdNum") String agentIdNum);
 }

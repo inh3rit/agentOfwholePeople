@@ -21,7 +21,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<Customer> customerList(String agentIdNum, Integer pageNo) {
-        return customerMapper.customerList(agentIdNum, pageNo * SqlParam.PageSize, SqlParam.PageSize);
+    public List<Customer> customerList(String agentIdNum) {
+        return customerMapper.customerList(agentIdNum);
     }
 }

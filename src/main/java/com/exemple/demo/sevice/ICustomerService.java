@@ -8,5 +8,5 @@ public interface ICustomerService {
 
     int customerCount(String agentIdNum);
 
-    List<Customer> customerList(String agentIdNum, Integer pageNo);
+    List<Customer> customerList(String agentIdNum);
 }

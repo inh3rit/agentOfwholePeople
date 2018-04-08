@@ -50,11 +50,6 @@
                 } else {
                     _layer.msg(result.msg ? result.msg : '获取用户列表失败');
                 }
-                if (!first) {
-                    setTimeout(function () {
-                        _pager.render({elem: 'pagination', count: totalCount, limit: pageSize, curr: pageNo, jump: getAgentList});
-                    }, 0);
-                }
             });
         }
         // find customer
@@ -62,17 +57,16 @@
         _bodyEle.on('click', '.btn_find_customer', function () {
             var uid = $(this).parent().attr('data-uid');
             if (!uid) {
-                layer.msg('找不到经纪人的id，无法进行查找，请刷新页面再试');
+                layer.msg('找不到经纪人的id，无法进行查找，请刷新页面再试');tt
                 return;
             }
             getCustomerList({curr: 1, agentIdNum: uid});
-            showFindCustomerDialog(uid);
         });
         // find customer
         var _btnFindCustomer = $('#btn_find_customer');
-        var _findCustomerHtmlContainer = $('#find_customer_html_container');
         var _dialogIdx = false;
-        function showFindCustomerDialog(uid) {
+        function showFindCustomerDialog() {
+            var _findCustomerHtmlContainer = $('#find_customer_html_container');
             _dialogIdx = _layer.open({
                 type: 1,
                 area: ['800px', '520px'],
@@ -89,9 +83,10 @@
             _btnFindCustomer.removeClass('layui-btn-disabled');
             _dialogIdx = false;
         }
-        var _customerListContainer = $('#findCustomerContainer');
-        var _customerList = {};
+
         function getCustomerList(obj, first) {
+            var _customerListContainer = $('#findCustomerContainer');
+            var _customerList = {};
             if (first) return;
             var pageNo = obj.curr;
             _customerListContainer.html('');
@@ -123,11 +118,8 @@
                 } else {
                     _layer.msg(result.msg ? result.msg : '获取顾客列表失败');
                 }
-                if (!first) {
-                    setTimeout(function () {
-                        _pager.render({elem: 'pagination', count: totalCount, limit: pageSize, curr: pageNo, jump: getCustomerList});
-                    }, 0);
-                }
+
+                showFindCustomerDialog();
             });
         }
 
@@ -140,13 +132,14 @@
                 layer.msg('找不到银行卡的id，无法进行查找，请刷新页面再试');
                 return;
             }
-            showFindCreditCardDialog(uid);
+
+            getCreditCardList({curr: 1, agentIdNum: uid});
         });
         // find creditCard
         var _btnFindCreditCard = $('#btn_find_creditcard');
-        var _findCreditCardHtmlContainer = $('#find_creditcard_html_container');
         var _dialogIdx = false;
-        function showFindCreditCardDialog(uid) {
+        function showFindCreditCardDialog() {
+            var _findCreditCardHtmlContainer = $('#find_creditcard_html_container');
             _dialogIdx = _layer.open({
                 type: 1,
                 area: ['800px', '520px'],
@@ -154,8 +147,6 @@
                 content: _findCreditCardHtmlContainer.html(),
                 cancel: closeFindCreditCardDialog
             });
-
-            getCreditCardList({curr: 1, agentIdNum: uid});
         }
         // close find CreditCard
         function closeFindCreditCardDialog() {
@@ -205,6 +196,7 @@
                         _pager.render({elem: 'pagination', count: totalCount, limit: pageSize, curr: pageNo, jump: getCreditCardList});
                     }, 0);
                 }
+                showFindCreditCardDialog();
             });
         }
 

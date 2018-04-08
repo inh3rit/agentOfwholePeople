@@ -25,17 +25,15 @@ public class CustomerController {
     /**
      * 分页获取顾客列表
      *
-     * @param pageNo Integer, 分页数字，从0开始
+     * @param agentIdNum String, 经纪人身份证号码
      * @return Result
      */
     @GetMapping("/list")
-    public Result userList(@RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo
-            , @RequestParam("agentIdNum") String agentIdNum) {
+    public Result userList(@RequestParam("agentIdNum") String agentIdNum) {
         Map<String, Object> resultMap = Maps.newHashMap();
         resultMap.put("customerCount", customerService.customerCount(agentIdNum));
-        resultMap.put("pageNo", pageNo);
         resultMap.put("pageSize", SqlParam.PageSize);
-        resultMap.put("customerList", customerService.customerList(agentIdNum, pageNo));
+        resultMap.put("customerList", customerService.customerList(agentIdNum));
         return new Result<>(ResultEnum.SUCCESS, resultMap);
     }
 }

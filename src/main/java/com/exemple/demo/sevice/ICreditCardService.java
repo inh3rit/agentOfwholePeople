@@ -8,5 +8,5 @@ public interface ICreditCardService {
 
     int creditCardCount(String agentIdNum);
 
-    List<CreditCard> creditCardList(String agentIdNum, Integer pageNo);
+    List<CreditCard> creditCardList(String agentIdNum);
 }

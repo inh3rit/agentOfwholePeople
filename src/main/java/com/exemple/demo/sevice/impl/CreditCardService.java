@@ -21,7 +21,7 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public List<CreditCard> creditCardList(String agentIdNum, Integer pageNo) {
-        return creditCardMapper.creditCardList(agentIdNum, pageNo * SqlParam.PageSize, SqlParam.PageSize);
+    public List<CreditCard> creditCardList(String agentIdNum) {
+        return creditCardMapper.creditCardList(agentIdNum);
     }
 }
