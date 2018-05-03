@@ -1,4 +1,4 @@
 spring:
-  profiles.active: dev
+  profiles.active: prod
 logging:
-  profiles.active: dev
+  profiles.active: prod

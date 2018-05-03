@@ -165,7 +165,8 @@ INSERT INTO `interface`(`name`, `type`, `url`, `nid`)
 VALUES ('用户管理', 1,'/pages/system/userList.html', 1),
   ('角色管理', 1, '/pages/system/roleList.html', 1),
   ('接口管理', 1,'/pages/system/interfaceList.html', 1),
-  ('导航栏管理', 1,'/pages/system/navigationList.html', 1);
+  ('导航栏管理', 1,'/pages/system/navigationList.html', 1),
+  ('经纪人管理', 1,	'/pages/business/agentList.html', 2);
 -- html url
 INSERT INTO `role_interface`(`rid`, `iid`)
 VALUES (2, 1), (2, 2), (2, 3),(2, 4); -- 系统管理员
@@ -194,8 +195,7 @@ INSERT INTO `interface`(`name`, `type`, `url`, `order_num`)
       ('修改导航栏', 0, '/api/navigation/update', 10), -- 25
       ('删除导航栏', 0, '/api/navigation/del', 10), -- 26
       ('获取所有启用的导航栏', 0, '/api/navigation/enabled', 10), -- 27
-      ('根据用户获取用于显示的导航栏', 0, '/api/navigation/navShow', 10),
-      ('经纪人管理', 1,	'/pages/business/agentList.html', 0); -- 28
+      ('根据用户获取用于显示的导航栏', 0, '/api/navigation/navShow', 10);
 -- api
 INSERT INTO `role_interface`(`rid`, `iid`) VALUES (1, 5), (1, 6), (1, 28), -- 基础角色
   (2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18), -- 系统管理员

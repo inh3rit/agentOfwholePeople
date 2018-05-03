@@ -56,7 +56,7 @@ layui.define(['jquery', 'layer', 'element', 'commonUtils', 'form', 'commonLoadin
         if (!footer) return;
         footer.html(
             '<div class="page_footer_container">'
-            + '<span>Copyright xxxxxxxxxxxxxxxxxxxxxxx</span>'
+            + '<span>公安机关备案号: 34019202000342</span>'
             +'</div>'
         );
         _domElement.init();
